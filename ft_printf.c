@@ -6,7 +6,7 @@
 /*   By: dzhukov <dzhukov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 20:16:33 by dzhukov           #+#    #+#             */
-/*   Updated: 2025/10/31 19:48:49 by dzhukov          ###   ########.fr       */
+/*   Updated: 2025/10/31 20:10:52 by dzhukov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,8 @@ void	ft_puthex(unsigned int n, char upper)
 	write(1, &c, 1);
 }
 
+
+
 int	ft_switch(char c, va_list *p_args)
 {
 	long	n;
@@ -124,18 +126,16 @@ int	ft_switch(char c, va_list *p_args)
 		n = va_arg(*p_args, int);
 		return (ft_putnbr_arg(n), ft_intlen(n));
 	}
-	else if (c == 'u')
+	else if (c == 'u' || c == 'x' || c == 'X')
 	{
 		n = va_arg(*p_args, unsigned int);
-		return (ft_putnbr_arg(n), ft_intlen(n));
-	}
-	else if (c == 'x' || c == 'X')
-	{
-		n = va_arg(*p_args, unsigned int);
-		return (ft_puthex(n, c), ft_hexlen(n));
+		if (c == 'x' || c == 'X')
+			return (ft_puthex(n, c), ft_hexlen(n));
+		else
+			return (ft_putnbr_arg(n), ft_intlen(n));
 	}
 	else if (c == '%')
-		return (write(1, "%", 1), 1);
+		return (write(1, "%", 1));
 }
 
 int	ft_printf(const char *s, ...)
