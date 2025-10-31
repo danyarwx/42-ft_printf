@@ -6,7 +6,7 @@
 /*   By: dzhukov <dzhukov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 20:16:33 by dzhukov           #+#    #+#             */
-/*   Updated: 2025/10/31 14:47:01 by dzhukov          ###   ########.fr       */
+/*   Updated: 2025/10/31 19:48:49 by dzhukov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_putchar_arg(va_list *p_args)
 {
 	char	c;
 
-	c = va_arg(*p_args, char);
+	c = va_arg(*p_args, int);
 	write(1, &c, 1);
 	return (1);
 }
@@ -35,8 +35,7 @@ int	ft_putstr_arg(va_list *p_args)
 	return (i);
 }
 
-
-void	ft_putnbr_arg(long n)
+void	ft_putnbr_arg(long long n)
 {
 	char	c;
 
@@ -52,19 +51,18 @@ void	ft_putnbr_arg(long n)
 	}
 	if (n > 9)
 	{
-		ft_putnbr(n / 10);
+		ft_putnbr_arg(n / 10);
 	}
 	c = (n % 10) + '0';
 	write(1, &c, 1);
 }
 
-
-int	ft_count_len(int n)
+int	ft_intlen(int n)
 {
 	int	count;
+
 	if (n == -2147483648)
 		return (11);
-
 	count = 0;
 	if (n == 0)
 		return (1);
@@ -83,7 +81,7 @@ int	ft_count_len(int n)
 
 int	ft_hexlen(unsigned int n)
 {
-	int count;
+	int	count;
 
 	count = 1;
 	while (n > 0)
@@ -94,54 +92,50 @@ int	ft_hexlen(unsigned int n)
 	return (count);
 }
 
-void	ft_puthex(unsigned int n)
+void	ft_puthex(unsigned int n, char upper)
 {
-	char	base[] = "0123456789abcdef";
-	char c;
+	char	*base;
+	char	c;
 
-	if (n == -2147483648)
+	if (upper == 'X')
+		base = "0123456789ABCDEF";
+	else
+		base = "0123456789abcdef";
+	if (n >= 16)
 	{
-		write(1, "-2147483648", 11);
-		return ;
-	}
-	if (n < 0)
-	{
-		write(1, "-", 1);
-		n = n * (-1);
-	}
-	if (n > 9)
-	{
-		ft_puthex(n / 16);
+		ft_puthex(n / 16, upper);
 	}
 	c = base[n % 16];
 	write(1, &c, 1);
 }
 
-int	ft_switch(const char *s, int i, va_list *p_args)
+int	ft_switch(char c, va_list *p_args)
 {
-	long n;
-	switch (s[i])
-	{
-	case 'c':
+	long	n;
+
+	if (c == 'c')
 		return (ft_putchar_arg(p_args));
-	case 's':
+	else if (c == 's')
 		return (ft_putstr_arg(p_args));
-	case 'p':
-		break ;
-	case 'd' || 'i':
+	else if (c == 'p')
+		return (0);
+	else if (c == 'd' || c == 'i')
+	{
 		n = va_arg(*p_args, int);
-		return (ft_putnbr_arg(n), ft_count_len(n));
-	case 'u':
-		n = va_arg(*p_args, unsigned int);
-		return (ft_putnbr_arg(n), ft_count_len(n));
-	case 'x':
-		n = va_arg(*p_args, unsigned int);
-		return (ft_puthex(n), ft_hexlen(n));
-	case 'X':
-		break ;
-	case '%':
-		return (write(1, "%", 1), 1);
+		return (ft_putnbr_arg(n), ft_intlen(n));
 	}
+	else if (c == 'u')
+	{
+		n = va_arg(*p_args, unsigned int);
+		return (ft_putnbr_arg(n), ft_intlen(n));
+	}
+	else if (c == 'x' || c == 'X')
+	{
+		n = va_arg(*p_args, unsigned int);
+		return (ft_puthex(n, c), ft_hexlen(n));
+	}
+	else if (c == '%')
+		return (write(1, "%", 1), 1);
 }
 
 int	ft_printf(const char *s, ...)
@@ -162,7 +156,7 @@ int	ft_printf(const char *s, ...)
 		}
 		else
 		{
-			total += ft_switch(s, ++i, &args);
+			total += ft_switch(s[++i], &args);
 			// pass s[i] and va_arg to the other function
 			// decide based on the type cspdiuxX%
 		}
@@ -171,7 +165,7 @@ int	ft_printf(const char *s, ...)
 	return (va_end(args), total);
 }
 
-// #include <stdio.h>
+#include <stdio.h>
 
 // int sum(int a, ...)
 // {
@@ -190,9 +184,15 @@ int	ft_printf(const char *s, ...)
 // 	return (s);
 // }
 
-// int main()
-// {
-// 	printf("The sum is %d\n", sum(5, 2, 3, 2, 4, 3, 5, 0));
+int	main(void)
+{
+	unsigned int	n;
+	char			str[] = "hello world";
 
-// 	return (0);
-// }
+	n = 123;
+	printf("The printf result is : %x\n", n);
+	// printf("The printf result is : %X\n", n);
+	ft_printf("My result is : %x\n", n);
+	// ft_printf("My result is : %X\n", n);
+	return (0);
+}
