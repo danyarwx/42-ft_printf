@@ -6,7 +6,7 @@
 /*   By: dzhukov <dzhukov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 20:16:33 by dzhukov           #+#    #+#             */
-/*   Updated: 2025/10/28 20:41:38 by dzhukov          ###   ########.fr       */
+/*   Updated: 2025/10/31 14:26:27 by dzhukov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,55 @@ int	ft_putstr_arg(va_list *p_args)
 	return (i);
 }
 
+
+void	ft_putnbr_arg(long n)
+{
+	char	c;
+
+	if (n == -2147483648)
+	{
+		write(1, "-2147483648", 11);
+		return ;
+	}
+	if (n < 0)
+	{
+		write(1, "-", 1);
+		n = n * (-1);
+	}
+	if (n > 9)
+	{
+		ft_putnbr(n / 10);
+	}
+	c = (n % 10) + '0';
+	write(1, &c, 1);
+}
+
+
+int	ft_count_len(int n)
+{
+	int	count;
+	if (n == -2147483648)
+		return (11);
+
+	count = 0;
+	if (n == 0)
+		return (1);
+	if (n < 0)
+	{
+		n = n * (-1);
+		count = 1;
+	}
+	while (n > 0)
+	{
+		n = n / 10;
+		count++;
+	}
+	return (count);
+}
+
 int	ft_switch(const char *s, int i, va_list *p_args)
 {
+	long n;
 	switch (s[i])
 	{
 	case 'c':
@@ -45,18 +92,18 @@ int	ft_switch(const char *s, int i, va_list *p_args)
 		return (ft_putstr_arg(p_args));
 	case 'p':
 		break ;
-	case 'd':
-		break ;
-	case 'i':
-		break ;
+	case 'd' || 'i':
+		n = va_arg(*p_args, int);
+		return (ft_putnbr_arg(n), ft_count_len(n));
 	case 'u':
-		break ;
+		n = va_arg(*p_args, unsigned int);
+		return (ft_putnbr_arg(n), ft_count_len(n));
 	case 'x':
 		break ;
 	case 'X':
 		break ;
 	case '%':
-		break ;
+		return (write(1, "%", 1), 1);
 	}
 }
 
