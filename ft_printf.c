@@ -6,7 +6,7 @@
 /*   By: dzhukov <dzhukov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 20:16:33 by dzhukov           #+#    #+#             */
-/*   Updated: 2025/10/31 14:26:27 by dzhukov          ###   ########.fr       */
+/*   Updated: 2025/10/31 14:47:01 by dzhukov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,42 @@ int	ft_count_len(int n)
 	return (count);
 }
 
+int	ft_hexlen(unsigned int n)
+{
+	int count;
+
+	count = 1;
+	while (n > 0)
+	{
+		n = n / 16;
+		count++;
+	}
+	return (count);
+}
+
+void	ft_puthex(unsigned int n)
+{
+	char	base[] = "0123456789abcdef";
+	char c;
+
+	if (n == -2147483648)
+	{
+		write(1, "-2147483648", 11);
+		return ;
+	}
+	if (n < 0)
+	{
+		write(1, "-", 1);
+		n = n * (-1);
+	}
+	if (n > 9)
+	{
+		ft_puthex(n / 16);
+	}
+	c = base[n % 16];
+	write(1, &c, 1);
+}
+
 int	ft_switch(const char *s, int i, va_list *p_args)
 {
 	long n;
@@ -99,7 +135,8 @@ int	ft_switch(const char *s, int i, va_list *p_args)
 		n = va_arg(*p_args, unsigned int);
 		return (ft_putnbr_arg(n), ft_count_len(n));
 	case 'x':
-		break ;
+		n = va_arg(*p_args, unsigned int);
+		return (ft_puthex(n), ft_hexlen(n));
 	case 'X':
 		break ;
 	case '%':
