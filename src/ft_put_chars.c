@@ -6,7 +6,7 @@
 /*   By: dzhukov <dzhukov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 22:18:00 by dzhukov           #+#    #+#             */
-/*   Updated: 2025/11/01 22:18:46 by dzhukov          ###   ########.fr       */
+/*   Updated: 2025/11/01 23:34:50 by dzhukov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int	ft_putstr_arg(va_list *p_args)
 	int		i;
 
 	s = va_arg(*p_args, char *);
+	if (s == NULL)
+		return (write(1, "(null)", 6));
 	i = 0;
 	while (s[i])
 		write(1, &(s[i++]), 1);
