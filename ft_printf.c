@@ -6,7 +6,7 @@
 /*   By: dzhukov <dzhukov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 20:16:33 by dzhukov           #+#    #+#             */
-/*   Updated: 2025/10/31 20:10:52 by dzhukov          ###   ########.fr       */
+/*   Updated: 2025/11/01 17:47:36 by dzhukov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	ft_intlen(int n)
 	return (count);
 }
 
-int	ft_hexlen(unsigned int n)
+int	ft_hexlen(unsigned long n)
 {
 	int	count;
 
@@ -92,7 +92,7 @@ int	ft_hexlen(unsigned int n)
 	return (count);
 }
 
-void	ft_puthex(unsigned int n, char upper)
+void	ft_puthex(unsigned long n, char upper)
 {
 	char	*base;
 	char	c;
@@ -110,6 +110,20 @@ void	ft_puthex(unsigned int n, char upper)
 }
 
 
+int	ft_putptr(va_list *p_args)
+{
+	int count;
+	void * ptr;
+
+	ptr = va_arg(*p_args, void *);
+
+	count = write(1, "0x", 2);
+
+	ft_puthex(ptr, 'x');
+
+	return (count + ft_hexlen(ptr));
+}
+
 
 int	ft_switch(char c, va_list *p_args)
 {
@@ -120,7 +134,7 @@ int	ft_switch(char c, va_list *p_args)
 	else if (c == 's')
 		return (ft_putstr_arg(p_args));
 	else if (c == 'p')
-		return (0);
+		return (ft_putptr(p_args));
 	else if (c == 'd' || c == 'i')
 	{
 		n = va_arg(*p_args, int);
@@ -187,12 +201,17 @@ int	ft_printf(const char *s, ...)
 int	main(void)
 {
 	unsigned int	n;
+	void * ptr;
 	char			str[] = "hello world";
+	int result;
 
 	n = 123;
-	printf("The printf result is : %x\n", n);
+	ptr = &n;
+
+	printf("The printf result is : %p\n", ptr);
 	// printf("The printf result is : %X\n", n);
-	ft_printf("My result is : %x\n", n);
+	result = ft_printf("My result is : %p\n", ptr);
 	// ft_printf("My result is : %X\n", n);
+	ft_printf("Function printed %d characters.", result);
 	return (0);
 }
