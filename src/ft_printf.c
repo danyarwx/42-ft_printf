@@ -6,11 +6,11 @@
 /*   By: dzhukov <dzhukov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 20:16:33 by dzhukov           #+#    #+#             */
-/*   Updated: 2025/11/01 22:29:48 by dzhukov          ###   ########.fr       */
+/*   Updated: 2025/11/01 23:10:53 by dzhukov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
+#include "../include/libft.h"
 #include "ft_printf.h"
 
 int	ft_switch(char c, va_list *p_args)

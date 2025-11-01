@@ -6,7 +6,7 @@
 /*   By: dzhukov <dzhukov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 22:22:23 by dzhukov           #+#    #+#             */
-/*   Updated: 2025/11/01 22:22:54 by dzhukov          ###   ########.fr       */
+/*   Updated: 2025/11/01 23:15:17 by dzhukov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_hexlen(unsigned long n)
 	return (count);
 }
 
-void	ft_puthex(unsigned long n, char upper)
+void	ft_puthex(unsigned long long n, char upper)
 {
 	char	*base;
 	char	c;
