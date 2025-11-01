@@ -6,7 +6,7 @@
 /*   By: dzhukov <dzhukov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 20:16:33 by dzhukov           #+#    #+#             */
-/*   Updated: 2025/11/01 22:24:39 by dzhukov          ###   ########.fr       */
+/*   Updated: 2025/11/01 22:29:48 by dzhukov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,6 @@ int	ft_printf(const char *s, ...)
 		else
 		{
 			total += ft_switch(s[++i], &args);
-			// pass s[i] and va_arg to the other function
-			// decide based on the type cspdiuxX%
 		}
 		i++;
 	}
@@ -78,12 +76,12 @@ int	ft_printf(const char *s, ...)
 // 	char			str[] = "hello world";
 // 	int result;
 
-// 	n = 123;
+// 	n = 0;
 // 	ptr = &n;
 
-// 	printf("The printf result is : %p\n", ptr);
+// 	printf("The printf result is : %x\n", n);
 // 	// printf("The printf result is : %X\n", n);
-// 	result = ft_printf("My result is : %p\n", ptr);
+// 	result = ft_printf("My result is : %x\n", n);
 // 	// ft_printf("My result is : %X\n", n);
 // 	ft_printf("Function printed %d characters.", result);
 // 	return (0);
