@@ -10,11 +10,12 @@ LIBFT_DIR   := libft
 LIBFT_A     := $(LIBFT_DIR)/libft.a
 
 SRCS := $(addprefix $(SRC_DIR)/, \
-        ft_printf.c \
-        ft_put_chars.c \
-        ft_put_nbr.c  \
-        ft_put_ptr.c  \
-        ft_put_hex.c)
+		ft_printf.c \
+		ft_put_chars.c \
+		ft_put_nbr.c \
+		ft_put_unbr.c \
+		ft_put_ptr.c \
+		ft_put_hex.c)
 
 OBJS := $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 

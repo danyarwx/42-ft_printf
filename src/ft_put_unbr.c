@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_put_nbr.c                                       :+:      :+:    :+:   */
+/*   ft_put_unbr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dzhukov <dzhukov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/01 22:19:42 by dzhukov           #+#    #+#             */
-/*   Updated: 2025/11/02 19:29:54 by dzhukov          ###   ########.fr       */
+/*   Created: 2025/11/02 19:29:42 by dzhukov           #+#    #+#             */
+/*   Updated: 2025/11/02 19:30:21 by dzhukov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_intlen(int n)
+int	ft_uintlen(unsigned int n)
 {
 	int	count;
 
-	if (n == -2147483648)
-		return (11);
 	count = 0;
 	if (n == 0)
 		return (1);
-	if (n < 0)
-	{
-		n = n * (-1);
-		count = 1;
-	}
+
 	while (n > 0)
 	{
 		n = n / 10;
@@ -34,24 +28,12 @@ int	ft_intlen(int n)
 	return (count);
 }
 
-void	ft_putnbr_arg(long n)
+void	ft_put_unbr(unsigned int n)
 {
 	char	c;
 
-	if (n == -2147483648)
-	{
-		write(1, "-2147483648", 11);
-		return ;
-	}
-	if (n < 0)
-	{
-		write(1, "-", 1);
-		n = n * (-1);
-	}
 	if (n > 9)
-	{
-		ft_putnbr_arg(n / 10);
-	}
+		ft_put_unbr(n / 10);
 	c = (n % 10) + '0';
 	write(1, &c, 1);
 }
