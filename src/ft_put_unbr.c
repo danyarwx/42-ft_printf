@@ -6,7 +6,7 @@
 /*   By: dzhukov <dzhukov@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 19:29:42 by dzhukov           #+#    #+#             */
-/*   Updated: 2025/11/02 19:30:21 by dzhukov          ###   ########.fr       */
+/*   Updated: 2025/11/02 20:00:50 by dzhukov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	ft_uintlen(unsigned int n)
 	count = 0;
 	if (n == 0)
 		return (1);
-
 	while (n > 0)
 	{
 		n = n / 10;
