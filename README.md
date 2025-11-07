@@ -1,4 +1,4 @@
-# ft_printf — Custom Implementation of printf
+# ft_printf — Custom implementation of the printf function
 
 ![Typewriter](assets/typewriter.png)
 
