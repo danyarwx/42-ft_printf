@@ -7,30 +7,17 @@ This project is part of the **42 curriculum** and focuses on mastering **variadi
 
 ---
 
-## 📘 Overview
+## Overview
 
 `ft_printf` reproduces the behavior of the original `printf` function from `<stdio.h>`, allowing formatted output to `stdout`.  
 It handles various format specifiers, flags, and conversion types while ensuring clean and maintainable C code.
 
 ---
 
-## 🧩 Supported Conversions
+## Project Structure
 
-| Specifier | Output |
-|------------|---------|
-| `%c` | Character |
-| `%s` | String |
-| `%p` | Pointer address (in hexadecimal) |
-| `%d` | Signed decimal integer |
-| `%i` | Signed decimal integer (identical to `%d`) |
-| `%u` | Unsigned decimal integer |
-| `%x` | Unsigned hexadecimal integer (lowercase) |
-| `%X` | Unsigned hexadecimal integer (uppercase) |
-| `%%` | Literal percent sign |
-
----
-
-## 🏗️ Project Structure
+> [!NOTE]
+> This project builds upon my [libft](https://github.com/danyarwx/42-libft) library.
 
 ```
 42-ft_printf/
@@ -50,18 +37,35 @@ It handles various format specifiers, flags, and conversion types while ensuring
 └── Makefile                  # Builds libft and ft_printf into one library
 ```
 
-> [!NOTE]
-> Only the `libft/` and `src/` directories are needed to compile the library.  
-> The `include/` directory centralizes headers for both components.
+---
+
+## Supported Conversions
+
+| Specifier | Output |
+|------------|---------|
+| `%c` | Character |
+| `%s` | String |
+| `%p` | Pointer address (in hexadecimal) |
+| `%d` | Signed decimal integer |
+| `%i` | Signed decimal integer (identical to `%d`) |
+| `%u` | Unsigned decimal integer |
+| `%x` | Unsigned hexadecimal integer (lowercase) |
+| `%X` | Unsigned hexadecimal integer (uppercase) |
+| `%%` | Literal percent sign |
 
 ---
 
-## ⚙️ Build & Usage
+## Build & Usage
+
+> [!IMPORTANT]
+> Only the `ft_printf/` folder is required to compile and use the library.  
+> The `assets/` folder and `README.md` are for documentation only.
 
 ### 1. Clone and build
 
 ```bash
 git clone https://github.com/danyarwx/42-ft_printf.git
+cd ft_printf/
 make
 ```
 
@@ -81,7 +85,7 @@ gcc main.c -L. -lftprintf -I include
 
 ---
 
-## 🧠 Implementation Highlights
+## Implementation Highlights
 
 - Built using **variadic functions** (`stdarg.h`)
 - Modular design: each type handled by a dedicated function
@@ -91,7 +95,7 @@ gcc main.c -L. -lftprintf -I include
 
 ---
 
-## 💡 Example Usage
+## Example Usage
 
 ```c
 #include "ft_printf.h"
@@ -118,7 +122,7 @@ Pointer: 0x7ffeefbff5b0
 
 ---
 
-## 🧰 Makefile Targets
+## Makefile Targets
 
 | Command | Description |
 |----------|--------------|
@@ -129,7 +133,7 @@ Pointer: 0x7ffeefbff5b0
 
 ---
 
-## 🪶 License
+## License
 
 This repository is part of the **42 curriculum**.  
 You are free to reference or reuse it for educational purposes, provided you credit appropriately.
